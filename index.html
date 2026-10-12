@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUEGO AHORCADO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<div id="cuenta">
+
+    <button id="boton-cuenta">
+        👤 Cuenta
+    </button>
+    
+<div id="menu-cuenta" style="display: none;">
+
+    <!-- Opciones para visitante -->
+
+    <div id="opciones-visitante">
+
+        <button id="boton-login">
+            🔐 Iniciar sesión
+        </button>
+
+        <button id="boton-registro">
+            📝 Registrarse
+        </button>
+
+    </div>
+
+
+    <!-- Opciones para usuario conectado -->
+
+    <div id="opciones-usuario" style="display: none;">
+
+        <button id="boton-mi-cuenta">
+            ⚙️ Mi cuenta
+        </button>
+
+        <button id="boton-cerrar-sesion">
+            🚪 Cerrar sesión
+        </button>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+<div id="panel-acceso">
+
+    <div id="contenido-acceso">
+
+        <button id="cerrar-acceso">
+            ✕
+        </button>
+
+        <!-- LOGIN -->
+
+        <div id="formulario-login">
+
+            <h2>🔐 Iniciar sesión</h2>
+
+            <input
+                type="text"
+                id="login-identificador"
+                placeholder="Usuario o correo"
+            >
+
+            <input
+                type="password"
+                id="login-password"
+                placeholder="Contraseña"
+            >
+
+           
+<button
+    type="button"
+    id="enviar-login"
+>
+    Iniciar sesión
+</button>
+
+
+            <p id="mensaje-login"></p>
+
+        </div>
+
+        <!-- REGISTRO -->
+
+        <div id="formulario-registro" style="display: none;">
+
+            <h2>📝 Crear cuenta</h2>
+
+            <input
+                type="text"
+                id="registro-usuario"
+                placeholder="Nombre de usuario"
+                maxlength="15"
+            >
+
+            <input
+                type="email"
+                id="registro-email"
+                placeholder="Correo electrónico"
+            >
+
+            <input
+                type="password"
+                id="registro-password"
+                placeholder="Contraseña"
+            >
+
+            <button id="enviar-registro">
+                Registrarse
+            </button>
+
+            <p id="mensaje-registro"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    <header>
+        <h1>El Ahorcado</h1>
+
+        <P>Bienvenido al juego del ahorcado.
+            adivina la palabra antes de quedarte sin intentos.
+        </P>
+    </header>
+    <main>
+
+        <h2>Adivina la palabra</h2>
+<div id="jugador">
+
+    <h3>🎮 Jugador</h3>
+
+    <div id="formulario-jugador">
+
+        <input
+            type="text"
+            id="nombre-jugador"
+            placeholder="Escribí tu nombre"
+            maxlength="15"
+        >
+
+        <button id="guardar-nombre">
+            Continuar
+        </button>
+
+    </div>
+
+    <p id="jugador-actual"></p>
+
+</div>
+
+
+
+
+        
+<div id="zona-juego">
+
+<section id="ranking">
+
+    <h3>🏆 Top Rachas</h3>
+
+    <div id="lista-ranking">
+        <p>Cargando ranking...</p>
+    </div>
+
+</section>
+
+
+
+    <section id="ahorcado">
+
+        <div id="estadisticas">
+
+            <div>
+                <h3>🔥 Racha</h3>
+                <p id="racha">0</p>
+            </div>
+
+            <div>
+                <h3>🏆 Mejor racha</h3>
+                <p id="mejor-racha">0</p>
+            </div>
+
+        </div>
+
+
+        <div id="dibujo-ahorcado">
+            <div id="barra-superior"></div>
+            <div id="cuerda"></div>
+            <div id="cabeza"></div>
+            <div id="cuerpo"></div>
+            <div id="brazo-izquierdo"></div>
+            <div id="brazo-derecho"></div>
+            <div id="pierna-izquierda"></div>
+            <div id="pierna-derecha"></div>
+        </div>
+
+    </section>
+
+
+    <section id="donaciones">
+
+        <h3>❤️ Apoyá el juego</h3>
+
+        
+<p>
+    Si disfrutás el juego y querés ayudarme a seguir
+    mejorándolo y agregando nuevas funciones,
+    podés apoyar el proyecto con una donación. ❤️
+</p>
+
+
+
+        <div class="alias-donacion">
+            <span>Alias</span>
+            <strong id="alias">fasoestelar.mp</strong>
+            <small>📋 Hacé clic para copiar</small>
+        </div>
+
+        <button id="boton-donar">
+            💰 Donar
+        </button>
+
+    </section>
+
+</div>
+<section id="intentos">
+    <h3> Vidas restantes</h3>
+
+    <div id="corazones">
+        <span class="corazon">❤️</span>
+        <span class="corazon">❤️</span>
+        <span class="corazon">❤️</span>
+        <span class="corazon">❤️</span>
+        <span class="corazon">❤️</span>
+        <span class="corazon">❤️</span>
+    </div>
+    <p id="contador-intentos" style="display: none;">6</p>
+</section>
+
+
+        
+        <section id="palabra">
+            <h3>palabra</h3>
+            <p id="palabra-oculta">
+                </p>
+        </section>
+
+        <p id="mensaje-juego"></p>
+
+        
+
+       
+<div id="teclado">
+
+    <div class="fila-teclado">
+        <button class="letra">Q</button>
+        <button class="letra">W</button>
+        <button class="letra">E</button>
+        <button class="letra">R</button>
+        <button class="letra">T</button>
+        <button class="letra">Y</button>
+        <button class="letra">U</button>
+        <button class="letra">I</button>
+        <button class="letra">O</button>
+        <button class="letra">P</button>
+    </div>
+
+    <div class="fila-teclado">
+        <button class="letra">A</button>
+        <button class="letra">S</button>
+        <button class="letra">D</button>
+        <button class="letra">F</button>
+        <button class="letra">G</button>
+        <button class="letra">H</button>
+        <button class="letra">J</button>
+        <button class="letra">K</button>
+        <button class="letra">L</button>
+        <button class="letra">Ñ</button>
+    </div>
+
+    <div class="fila-teclado">
+        <button class="letra">Z</button>
+        <button class="letra">X</button>
+        <button class="letra">C</button>
+        <button class="letra">V</button>
+        <button class="letra">B</button>
+        <button class="letra">N</button>
+        <button class="letra">M</button>
+    </div>
+
+</div>
+
+
+            
+    
+        
+        
+
+    </main>
+    <script src="script.js"></script>
+
+    
+</body>
+</html>

@@ -1,0 +1,1412 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #222;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 17px;
+}
+
+main {
+    width: 90%;
+    max-width: 900px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+main h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+#ahorcado {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+#dibujo-ahorcado {
+    width: 250px;
+    height: 250px;
+    margin: 20px auto;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+#palabra {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+#palabra-oculta {
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#intentos {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+#contador-intentos {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* =========================
+   TECLADO TIPO COMPUTADORA
+   ========================= */
+
+#teclado {
+    background-color: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+
+    width: 100%;
+    overflow-x: auto;
+}
+
+.fila-teclado {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-bottom: 7px;
+}
+
+/* TECLAS */
+
+#teclado button {
+    width: 52px;
+    height: 52px;
+
+    margin: 0;
+
+    border: 1px solid #aaa;
+    border-radius: 7px;
+
+    background: linear-gradient(
+        to bottom,
+        #ffffff,
+        #e5e5e5
+    );
+
+    color: #222;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 0 #aaa,
+        0 4px 6px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.08s,
+        box-shadow 0.08s,
+        background-color 0.15s;
+}
+
+/* MOUSE SOBRE LA TECLA */
+
+#teclado button:hover:not(:disabled) {
+    background: #f5f5f5;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 0 #aaa,
+        0 6px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* TECLA PRESIONADA */
+
+#teclado button:active:not(:disabled) {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 1px 0 #aaa,
+        0 2px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* LETRA YA UTILIZADA */
+
+#teclado button:disabled {
+    background: #bdbdbd;
+    color: #777;
+
+    cursor: not-allowed;
+
+    box-shadow:
+        0 2px 0 #999;
+
+    transform: translateY(2px);
+}
+
+
+/* =========================
+   CELULAR
+   ========================= */
+
+@media (max-width: 600px) {
+
+    #teclado {
+        padding: 15px 5px;
+    }
+
+    .fila-teclado {
+        gap: 4px;
+    }
+
+    #teclado button {
+        width: 9vw;
+        height: 45px;
+
+        max-width: 48px;
+
+        font-size: 16px;
+    }
+}
+
+#reiniciar button:hover {
+    background-color: #444;
+}
+
+#dibujo-ahorcado {
+    position: relative;
+}
+
+#dibujo-ahorcado::before {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 10px;
+    background-color: #222;
+    bottom: 30px;
+    left: 50px;
+}
+
+#dibujo-ahorcado::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 180px;
+    background-color: #222;
+    bottom: 30px;
+    left: 80px;
+}
+
+#barra-superior {
+    position: absolute;
+    width: 130px;
+    height: 10px;
+    background-color: #222;
+    top: 30px;
+    left: 50px;
+}
+
+#cuerda {
+    position: absolute;
+    width: 5px;
+    height: 35px;
+    background-color: #222;
+    top: 40px;
+    left: 175px;
+}
+
+#cabeza {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border: 5px solid #222;
+    border-radius: 50%;
+    top: 70px;
+    left: 155px;
+}
+
+#cuerpo {
+    position: absolute;
+    width: 5px;
+    height: 65px;
+    background-color: #222;
+    top: 115px;
+    left: 175px;
+}
+
+#brazo-izquierdo {
+    position: absolute;
+    width: 50px;
+    height: 5px;
+    background-color: #222;
+    top: 125px;
+    left: 177px;
+    transform-origin: left center;
+    transform: rotate(150deg);
+}
+
+#brazo-derecho {
+    position: absolute;
+    width: 50px;
+    height: 5px;
+    background-color: #222;
+    top: 125px;
+    left: 177px;
+    transform-origin: left center;
+    transform: rotate(30deg);
+}
+
+#pierna-izquierda {
+    position: absolute;
+    width: 55px;
+    height: 5px;
+    background-color: #222;
+    top: 177px;
+    left: 177px;
+    transform-origin: left center;
+    transform: rotate(120deg);
+}
+
+#pierna-derecha {
+    position: absolute;
+    width: 55px;
+    height: 5px;
+    background-color: #222;
+    top: 177px;
+    left: 177px;
+    transform-origin: left center;
+    transform: rotate(60deg);
+}
+
+#cuerda,
+#cabeza,
+#cuerpo,
+#brazo-izquierdo,
+#brazo-derecho,
+#pierna-izquierda,
+#pierna-derecha {
+    display: none;
+}
+
+#estadisticas {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 20px;
+}
+
+#estadisticas div {
+    text-align: center;
+}
+
+#estadisticas h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+#estadisticas p {
+    font-size: 30px;
+    font-weight: bold;
+}
+#mensaje-juego {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+#ahorcado > h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+
+    #teclado button {
+        width: 40px;
+        height: 40px;
+        margin: 3px;
+        font-size: 16px;
+    }
+
+    #palabra-oculta {
+        font-size: 28px;
+        letter-spacing: 6px;
+    }
+
+    #dibujo-ahorcado {
+    width: 250px;
+    height: 250px;
+}
+     #pierna-izquierda,
+#pierna-derecha {
+    top: 177px;
+}
+
+}
+#teclado button.usada {
+    background-color: #eeeeee;
+    color: #e53935;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+#teclado button.usada:hover {
+    background-color: #eeeeee;
+    transform: none;
+}
+#zona-juego {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+#zona-juego #ahorcado {
+    flex: 1;
+    max-width: 600px;
+    margin-bottom: 0;
+}
+
+#donaciones {
+    width: 280px;
+
+    background-color: white;
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+    text-align: center;
+}
+
+#donaciones h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+#donaciones p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.alias-donacion {
+    background-color: #f2f2f2;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-bottom: 15px;
+}
+
+.alias-donacion span {
+    display: block;
+
+    font-size: 13px;
+    color: #777;
+
+    margin-bottom: 5px;
+}
+
+.alias-donacion strong {
+    display: block;
+
+    font-size: 18px;
+    color: #222;
+}
+
+#boton-donar {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #222;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+#boton-donar {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #222;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        background-color 0.15s,
+        box-shadow 0.15s;
+
+    box-shadow: 0 3px 0 #111;
+}
+
+#boton-donar:hover {
+    background-color: #444;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 0 #111;
+}
+
+#boton-donar:active {
+    transform: translateY(2px);
+
+    box-shadow: 0 1px 0 #111;
+}
+@media (max-width: 700px) {
+
+    #zona-juego {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #zona-juego #ahorcado {
+        width: 100%;
+    }
+
+    #donaciones {
+        width: 100%;
+        max-width: 600px;
+    }
+}
+#alias {
+    cursor: pointer;
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    transition:
+        transform 0.15s,
+        background-color 0.15s;
+}
+
+#alias:hover {
+    background-color: #e2e2e2;
+
+    transform: scale(1.05);
+}
+
+#alias:active {
+    transform: scale(0.97);
+}
+
+
+#alias:hover {
+    transform: scale(1.05);
+}
+.mensaje-copia {
+    margin-top: 10px;
+    margin-bottom: 0;
+
+    font-size: 14px !important;
+    font-weight: bold;
+
+    animation: aparecer 0.2s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.alias-donacion small {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 12px;
+    color: #777;
+}
+#donaciones {
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+#donaciones:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.18);
+}
+#boton-donar {
+    animation: aparecerBoton 0.5s ease;
+}
+
+@keyframes aparecerBoton {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+#donaciones h3 {
+    animation:
+        aparecerTitulo 0.5s ease,
+        latido 1.8s infinite ease-in-out;
+}
+@keyframes latido {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+
+}
+@keyframes aparecerTitulo {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+#corazones {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.corazon {
+    font-size: 32px;
+    display: inline-block;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+
+    /* ❤️ Latido constante */
+    animation: latidoCorazon 1.4s ease-in-out infinite;
+}
+
+/* ❤️ Animación de latido */
+@keyframes latidoCorazon {
+
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.10);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 💔 Corazón perdido */
+.corazon.roto {
+    animation: romperCorazon 0.35s ease forwards;
+}
+
+/* 💔 Animación de romperse */
+@keyframes romperCorazon {
+
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    30% {
+        transform: scale(1.35) rotate(-10deg);
+        opacity: 1;
+    }
+
+    60% {
+        transform: scale(0.9) rotate(10deg);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(0) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+#jugador {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+    text-align: center;
+}
+
+#jugador h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+#nombre-jugador {
+    width: 220px;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+    text-align: center;
+
+    outline: none;
+}
+#nombre-jugador:focus {
+    border-color: #222;
+}
+
+#guardar-nombre {
+    margin-left: 8px;
+
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #222;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#guardar-nombre:hover {
+    background-color: #444;
+}
+/* =========================
+   RANKING GLOBAL
+   ========================= */
+
+#ranking {
+    width: 280px;
+
+    background-color: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+    text-align: center;
+}
+
+#ranking h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+#lista-ranking {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.jugador-ranking {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+
+    background-color: #f2f2f2;
+
+    border-radius: 8px;
+}
+
+.posicion-ranking {
+    font-size: 20px;
+    width: 35px;
+}
+
+.nombre-ranking {
+    flex: 1;
+    text-align: left;
+    font-weight: bold;
+}
+
+.racha-ranking {
+    font-weight: bold;
+}
+
+#cuenta {
+    position: fixed;
+
+    top: 20px;
+    right: 25px;
+
+    width: auto;
+    margin: 0;
+
+    display: flex;
+    justify-content: flex-end;
+
+    z-index: 5000;
+}
+#boton-cuenta {
+    padding: 14px 24px;
+
+    border: none;
+    border-radius: 12px;
+
+    background-color: white;
+    color: #333;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+#boton-cuenta:hover {
+    background-color: #f2f2f2;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.22);
+}
+
+#menu-cuenta {
+    position: absolute;
+    top: 62px;
+    right: 0;
+
+    width: 220px;
+
+    background-color: white;
+    border-radius: 14px;
+
+    padding: 12px;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+
+    z-index: 1000;
+}
+
+#menu-cuenta button {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+    border-radius: 9px;
+
+    background-color: #f5f5f5;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+#menu-cuenta button:hover {
+    background-color: #e9e9e9;
+}
+
+
+/* =========================
+   CELULAR
+   ========================= */
+
+@media (max-width: 700px) {
+
+    #cuenta {
+        top: 15px;
+        right: 15px;
+    }
+
+    #boton-cuenta {
+        padding: 11px 16px;
+        font-size: 16px;
+    }
+
+    #menu-cuenta {
+        width: 200px;
+    }
+}
+
+
+
+#panel-acceso {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 2000;
+}
+
+#contenido-acceso {
+    position: relative;
+
+    width: 90%;
+    max-width: 400px;
+
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+}
+
+#cerrar-acceso {
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    border: none;
+    background: none;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+#formulario-login,
+#formulario-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#formulario-login h2,
+#formulario-registro h2 {
+    margin-bottom: 10px;
+}
+
+#formulario-login input,
+#formulario-registro input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+#enviar-login,
+#enviar-registro {
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #333;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#enviar-login:hover,
+#enviar-registro:hover {
+    background-color: #555;
+}
+
+#mensaje-login,
+#mensaje-registro {
+    min-height: 20px;
+    font-weight: bold;
+}
+
+#panel-acceso {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 2000;
+}
+
+#contenido-acceso {
+    position: relative;
+
+    width: 90%;
+    max-width: 400px;
+
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+}
+
+#cerrar-acceso {
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    border: none;
+    background: none;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+#formulario-login,
+#formulario-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#formulario-login h2,
+#formulario-registro h2 {
+    margin-bottom: 10px;
+}
+
+#formulario-login input,
+#formulario-registro input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+#enviar-login,
+#enviar-registro {
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #333;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#enviar-login:hover,
+#enviar-registro:hover {
+    background-color: #555;
+}
+
+#mensaje-login,
+#mensaje-registro {
+    min-height: 20px;
+    font-weight: bold;
+}
+
+/* ===== ESTILO GAMING ARCADE ===== */
+
+body {
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 56, 184, 0.18),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 90% 40%,
+            rgba(0, 229, 255, 0.13),
+            transparent 30%
+        ),
+        #160d2e;
+
+    color: #f8f5ff;
+}
+
+/* CABECERA */
+
+header {
+    background: linear-gradient(
+        120deg,
+        #251044,
+        #461778,
+        #172c58
+    );
+
+    border-bottom: 3px solid #ff38b8;
+    box-shadow: 0 6px 25px rgba(255, 56, 184, 0.20);
+}
+
+header h1 {
+    color: #ffffff;
+    background: none;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(
+        90deg,
+        #00e5ff,
+        #ff38b8,
+        #b6ff4a
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    text-shadow: none;
+    letter-spacing: 2px;
+}
+
+header p {
+    color: #e8dcff;
+}
+
+/* TARJETAS PRINCIPALES */
+
+#ahorcado,
+#palabra,
+#intentos,
+#teclado,
+#jugador,
+#donaciones,
+#ranking {
+    background: #251941;
+    color: #f8f5ff;
+
+    border: 1px solid rgba(180, 140, 255, 0.25);
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* TÍTULOS */
+
+main h2,
+#ahorcado h3,
+#palabra h3,
+#intentos h3,
+#jugador h3,
+#donaciones h3,
+#ranking h3 {
+    color: #00e5ff;
+}
+
+/* ÁREA DEL AHORCADO */
+
+#dibujo-ahorcado {
+    background: #160d2e;
+    border: 2px solid #8b5cf6;
+    box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.12);
+}
+
+/* PALABRA SECRETA */
+
+#palabra-oculta {
+    color: #b6ff4a;
+}
+
+/* ESTADÍSTICAS */
+
+#estadisticas p {
+    color: #ff38b8;
+}
+
+/* MENSAJE DEL JUEGO */
+
+#mensaje-juego {
+    background: #251941;
+    color: #b6ff4a;
+    border: 1px solid #8b5cf6;
+}
+
+/* FILAS DEL RANKING */
+
+.jugador-ranking {
+    background: #352451;
+    color: #ffffff;
+    border: 1px solid rgba(180, 140, 255, 0.2);
+}
+
+.nombre-ranking {
+    color: #f8f5ff;
+}
+
+.racha-ranking {
+    color: #b6ff4a;
+}
+
+/* DONACIONES */
+
+.alias-donacion {
+    background: #160d2e;
+    border: 1px solid #8b5cf6;
+}
+
+.alias-donacion span,
+.alias-donacion small {
+    color: #c9bce8;
+}
+
+.alias-donacion strong {
+    color: #00e5ff;
+}
+
+#alias:hover {
+    background: #352451;
+}
+
+#boton-donar {
+    background: linear-gradient(90deg, #ff38b8, #8b5cf6);
+    color: white;
+    box-shadow: 0 4px 0 #4a247c;
+}
+
+#boton-donar:hover {
+    background: linear-gradient(90deg, #ff65c8, #a78bfa);
+}
+
+/* FORMULARIO DEL JUGADOR */
+
+#nombre-jugador {
+    background: #160d2e;
+    border: 1px solid #8b5cf6;
+    color: white;
+}
+
+#nombre-jugador::placeholder {
+    color: #b9a9d6;
+}
+
+#guardar-nombre {
+    background: #00cde8;
+    color: #160d2e;
+}
+
+#guardar-nombre:hover {
+    background: #65efff;
+}
+
+/* TECLADO */
+
+#teclado button {
+    background: linear-gradient(180deg, #493269, #352451);
+    color: #ffffff;
+    border: 1px solid #8063a9;
+    box-shadow: 0 3px 0 #1a1029;
+}
+
+#teclado button:hover:not(:disabled) {
+    background: #8b5cf6;
+    color: white;
+}
+
+#teclado button:disabled,
+#teclado button.usada {
+    background: #352451;
+    color: #ff6b9d;
+    border-color: #594071;
+}
+
+/* CORAZONES */
+
+.corazon {
+    filter: drop-shadow(0 0 5px rgba(255, 56, 184, 0.3));
+}
+
+/* CUENTA Y MENÚ */
+
+#boton-cuenta {
+    background: linear-gradient(135deg, #ff38b8, #8b5cf6);
+    color: white;
+}
+
+#menu-cuenta {
+    background: #251941;
+    border: 1px solid #8b5cf6;
+}
+
+#menu-cuenta button {
+    background: #352451;
+    color: white;
+}
+
+#menu-cuenta button:hover {
+    background: #493269;
+}
+
+/* LOGIN Y REGISTRO */
+
+#contenido-acceso {
+    background: #251941;
+    color: white;
+    border: 1px solid #8b5cf6;
+}
+
+#contenido-acceso h2 {
+    color: #00e5ff;
+}
+
+#contenido-acceso input {
+    background: #160d2e;
+    color: white;
+    border-color: #8063a9;
+}
+
+#contenido-acceso input::placeholder {
+    color: #b9a9d6;
+}
+
+#enviar-login,
+#enviar-registro {
+    background: linear-gradient(90deg, #ff38b8, #8b5cf6);
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
